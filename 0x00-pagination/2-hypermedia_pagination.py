@@ -25,14 +25,14 @@ class Server:
         return self.__dataset
 
     def index_range(self, page: int, page_size: int) -> Tuple[int, int]:
-        """return a tuple of size two containing a start index and an end index
-        corresponding to the range of indexes to return in a list for those
-        particular pagination parameters."""
+        """Calculates and returns the start and end indexes for the
+        specified page and page size."""
         return (page - 1) * page_size, page * page_size
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """returns the page that is requested if the page and page_size are
-        valid arguments"""
+        """Retrieves and returns the requested page of data based on the
+        provided pagination parameters.
+        """
         assert isinstance(page, int) and isinstance(page_size, int),\
             "Both the page and the page_size must be integers."
         assert page > 0 and page_size > 0,\
@@ -43,10 +43,7 @@ class Server:
         return dataset[a:b]
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
-        """returns a simple implementation of a hypermedia pagination
-
-        Description: This type of pagination is when you include the
-        navigation through the paginated data
+        """Returns a hypermedia pagination dictionary.
         """
         dataset = self.dataset()
         total_pages = math.ceil(len(dataset) / page_size)
