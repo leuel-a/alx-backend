@@ -31,9 +31,12 @@ class Server:
         return (page - 1) * page_size, page * page_size
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """returns the page that is requested if the page and page_size are valid arguments"""
-        assert isinstance(page, int) and isinstance(page_size, int), "Both the page and the page_size must be integers."
-        assert page > 0 and page_size > 0, "Both the page and page_sie must be greater than 0"
+        """returns the page that is requested if the page and page_size are
+        valid arguments"""
+        assert isinstance(page, int) and isinstance(page_size, int),\
+            "Both the page and the page_size must be integers."
+        assert page > 0 and page_size > 0,\
+            "Both the page and page_sie must be greater than 0"
 
         dataset = self.dataset()
         a, b = self.index_range(page, page_size)
