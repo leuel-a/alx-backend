@@ -2,7 +2,7 @@
 """Simple Pagination"""
 import csv
 import math
-from typing import List, Tuple
+from typing import List, Tuple, Dict
 
 
 class Server:
@@ -41,3 +41,24 @@ class Server:
         dataset = self.dataset()
         a, b = self.index_range(page, page_size)
         return dataset[a:b]
+
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
+        """returns a simple implementation of a hypermedia pagination
+
+        Description: This type of pagination is when you include the
+        navigation through the paginated data
+        """
+        dataset = self.dataset()
+        total_pages = math.ceil(len(dataset) / page_size)
+        current_page = self.get_page(page, page_size)
+
+        prev_page = page - 1 if page - 1 > 0 else None
+        next_page = page + 1 if page + 1 <= total_pages else None
+        return {
+            'page_size': len(current_page),
+            'page': page,
+            'data': current_page,
+            'next_page': next_page,
+            'prev_page': prev_page,
+            'total_pages': total_pages
+        }
