@@ -28,7 +28,7 @@ def get_locale():
 def index() -> str:
     """Home Page for the Application"""
     home_title = gettext('Welcome to Holberton')
-    home_header = gettext('Hello world')
+    home_header = gettext('Hello world!')
     return render_template(
         '3-index.html',
         home_title=home_title,
